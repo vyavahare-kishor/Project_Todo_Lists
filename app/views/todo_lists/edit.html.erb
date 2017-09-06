@@ -1,0 +1,31 @@
+<h1>Assign Project to Developer</h1>
+<%= form_for(@todos) do |f| %>
+  <% if @todos.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@todos.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <ul>
+      <% @todos.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group col-xs-6 col-sm-3">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <%= f.label :status %>
+      <%= f.select(:status,  Todos::Application::Status.map{|value| [value.upcase, value]}, {}, class: 'form-control') %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Submit' %>
+  </div>
+<% end %>

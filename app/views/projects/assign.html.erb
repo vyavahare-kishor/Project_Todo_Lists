@@ -1,0 +1,36 @@
+<h1>Assign Project to Developer</h1>
+<%= nested_form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="form-group col-xs-6 col-sm-4">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', :disabled => true %>
+  </div>
+</div>
+
+  <%= f.label :todo_list_name %>
+    <%= f.fields_for :todo_lists do |todo| %>
+    <div class="row">
+      <div class="form-group col-sm-3">
+        <%= todo.text_field :name, class: 'form-control' %>
+        <%= todo.select(:user_id,  User.by_developer.all.collect { |p| [ p.name, p.id ] } << [current_user.name, current_user.id], {}, class: 'form-control') %>
+      </div>
+    </div>
+    <% end %>
+  <div class="actions">
+    <%= f.submit 'Submit' %>
+  </div>
+<% end %>
+
+<%= javascript_include_tag "projects" %>

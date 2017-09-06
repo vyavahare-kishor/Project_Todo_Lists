@@ -1,0 +1,24 @@
+<h1>Todo Lists</h1>
+<div class="table-responsive">
+  <table class="table table-sm table-striped table-bordered">
+     <thead class="thead-inverse">
+    <tr>
+      <th>Status</th>
+      <th>Task Name</th>
+      <th>Project Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todos.each do |todo| %>
+      <tr>
+        <td><%= todo.status.upcase %></td>
+        <td><%= todo.name %></td>
+        <td><%= todo.project.name %></td>
+        <td><%= link_to 'Change Status', edit_todo_list_path(todo) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+</div>

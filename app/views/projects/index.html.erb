@@ -1,0 +1,29 @@
+<h1>Projects</h1>
+<div class="table-responsive">
+  <table class="table table-sm table-striped table-bordered">
+     <thead class="thead-inverse">
+    <tr>
+      <th>Project Name</th>
+      <th>Todo Lists</th>
+      <th align="right" colspan="3"> Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.todo_lists.map(&:name).join(',') %></td>
+        <td><%= link_to 'Assign', projects_assign_path(id: project) %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+</div>
+
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>
